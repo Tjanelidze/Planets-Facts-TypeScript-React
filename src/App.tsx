@@ -9,13 +9,19 @@ function App() {
 
       <Header>
         <MainTitle>The Planets</MainTitle>
-        <nav>
-          <NavLinks>
-            {PLANETS.map((planet) => {
-              return <li>{planet.name}</li>;
+        <Mainnav>
+          <NavList>
+            {PLANETS.map((planet, indx) => {
+              return (
+                <li key={indx}>
+                  <NavLink as="a" href="#" $color={planet.color}>
+                    {planet.name}
+                  </NavLink>
+                </li>
+              );
             })}
-          </NavLinks>
-        </nav>
+          </NavList>
+        </Mainnav>
       </Header>
     </>
   );
@@ -55,19 +61,53 @@ const Header = styled.header`
   align-items: center;
   align-items: center;
   border-bottom: 1px solid #ffffff22;
-  padding: 2.2rem 4.1rem 2.7rem 3.2rem;
+  padding: 0 4.1rem 0 3.2rem;
+  height: 8.5rem;
 `;
 
-const NavLinks = styled.ul`
+const Mainnav = styled.nav`
+  height: 100%;
+`;
+
+const NavList = styled.ul`
   display: flex;
   gap: 3.3rem;
   list-style: none;
+  height: 100%;
+`;
+
+const NavLink = styled.a<{ $color?: string }>`
   color: #ffffffbe;
-  font-family: 'League Spartan', sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
+  font-family: 'League Spartan', sans-serif;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  position: relative;
+  &:link,
+  &:visited {
+    color: #ffffffbe;
+  }
+
+  &:hover,
+  &:active {
+    color: #fff;
+  }
+
+  &:hover::after {
+    position: absolute;
+    content: '';
+    top: -5px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: ${(props) => props.$color};
+  }
 `;
 
 export default App;
