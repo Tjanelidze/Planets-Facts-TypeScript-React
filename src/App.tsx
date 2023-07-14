@@ -99,14 +99,20 @@ const NavLink = styled.a<{ $color?: string }>`
     color: #fff;
   }
 
-  &:hover::after {
+  &::after {
     position: absolute;
     content: '';
     top: -5px;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
     height: 4px;
     background: ${(props) => props.$color};
+    transition: all 0.5s ease-out;
+  }
+
+  &:hover::after {
+    width: 100%;
   }
 `;
 
