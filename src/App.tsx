@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { styled, createGlobalStyle } from 'styled-components';
+import PLANETS from './assets/data.json';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <GlobalStyle />
+
+      <Header>
+        <MainTitle>The Planets</MainTitle>
+        <nav>
+          <NavLinks>
+            {PLANETS.map((planet) => {
+              return <li>{planet.name}</li>;
+            })}
+          </NavLinks>
+        </nav>
+      </Header>
     </>
-  )
+  );
 }
 
-export default App
+const GlobalStyle = createGlobalStyle<{ $whiteColor?: boolean }>`
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    background: url('assets/background-stars.svg');
+    background-size: cover;
+    background-color: #11112B;
+    min-height: 100vh;
+    font-family: 'Antonio', sans-serif;
+  }
+`;
+
+const MainTitle = styled.h1`
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 400;
+  letter-spacing: -1.05px;
+  text-transform: uppercase;
+`;
+
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
+  border-bottom: 1px solid #ffffff22;
+  padding: 2.2rem 4.1rem 2.7rem 3.2rem;
+`;
+
+const NavLinks = styled.ul`
+  display: flex;
+  gap: 3.3rem;
+  list-style: none;
+  color: #ffffffbe;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+`;
+
+export default App;
