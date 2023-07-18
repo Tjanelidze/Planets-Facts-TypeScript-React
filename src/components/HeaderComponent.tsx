@@ -1,34 +1,30 @@
 import styled from 'styled-components';
 import { planetDataInterface } from '../interface/planetDataInterface';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function HeaderComponent({ planets }: planetDataInterface) {
   return (
-    <Header>
-      <MainTitle>The Planets</MainTitle>
-      <Mainnav>
-        <NavList>
-          {planets.map((planet, indx) => {
-            return (
-              <li key={indx}>
-                <NavLink as="a" href="#" $color={planet.color}>
-                  {planet.name}
-                </NavLink>
-              </li>
-            );
-          })}
-        </NavList>
-      </Mainnav>
-    </Header>
+    <>
+      <Header>
+        <MainTitle>The Planets</MainTitle>
+        <Mainnav>
+          <NavList>
+            {planets.map((planet, indx) => {
+              return (
+                <li key={indx}>
+                  <StyledLink to={`/${planet.name}`} $color={planet.color}>
+                    {planet.name}
+                  </StyledLink>
+                </li>
+              );
+            })}
+          </NavList>
+        </Mainnav>
+      </Header>
+      <Outlet />
+    </>
   );
 }
-
-const MainTitle = styled.h1`
-  color: #fff;
-  font-size: 2.8rem;
-  font-weight: 400;
-  letter-spacing: -1.05px;
-  text-transform: uppercase;
-`;
 
 const Header = styled.header`
   display: flex;
@@ -38,6 +34,14 @@ const Header = styled.header`
   border-bottom: 1px solid #ffffff22;
   padding: 0 4.1rem 0 3.2rem;
   height: 8.5rem;
+`;
+
+const MainTitle = styled.h1`
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 400;
+  letter-spacing: -1.05px;
+  text-transform: uppercase;
 `;
 
 const Mainnav = styled.nav`
@@ -51,7 +55,7 @@ const NavList = styled.ul`
   height: 100%;
 `;
 
-const NavLink = styled.a<{ $color?: string }>`
+const StyledLink = styled(Link)<{ $color?: string }>`
   color: #ffffffbe;
   font-size: 1.3rem;
   font-weight: 700;
