@@ -6,7 +6,7 @@ export default function HeaderComponent({ planets }: planetDataInterface) {
   return (
     <>
       <Header>
-        <MainTitle>The Planets</MainTitle>
+        <MainTitle to="/">The Planets</MainTitle>
         <Mainnav>
           <NavList>
             {planets.map((planet, indx) => {
@@ -36,12 +36,22 @@ const Header = styled.header`
   height: 8.5rem;
 `;
 
-const MainTitle = styled.h1`
+const MainTitle = styled(Link)`
   color: #fff;
   font-size: 2.8rem;
   font-weight: 400;
   letter-spacing: -1.05px;
   text-transform: uppercase;
+  text-decoration: none;
+  &:link,
+  &:visited {
+    color: #fff;
+  }
+
+  &:hover,
+  &:active {
+    color: #fff;
+  }
 `;
 
 const Mainnav = styled.nav`
