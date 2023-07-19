@@ -7,12 +7,13 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
   const { planetName } = useParams();
   const filteredPlanet = planets.find((planet) => planet.name === planetName);
   return (
-    <article>
+    <StyledArticle>
       <Container>
         <PlanetImg>
           <img
             src={`${filteredPlanet?.images.planet}`}
             alt={`Illustartion of ${filteredPlanet?.name}`}
+            style={{ width: '95%' }}
           />
         </PlanetImg>
         <ArticleConcept>
@@ -41,17 +42,22 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
         </ArticleConcept>
       </Container>
       <FourCardsComponent planets={planets} />
-    </article>
+    </StyledArticle>
   );
 }
+
+const StyledArticle = styled.article`
+  padding: 10rem 0 5rem;
+`;
 const Container = styled.div`
   max-width: 130rem;
   margin: 0 auto;
   padding: 0 3.2rem;
-  margin-top: 12.6rem;
+  /* margin-top: 12.6rem; */
   display: grid;
-  grid-template-columns: 70fr 30fr;
-  gap: 5rem;
+  grid-template-columns: 65fr 35fr;
+  grid-template-rows: 500px;
+  gap: 3.5rem;
 `;
 
 const PlanetImg = styled.div`
