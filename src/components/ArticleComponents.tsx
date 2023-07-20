@@ -13,7 +13,6 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
   const { planetName } = useParams();
   const filteredPlanet = planets.find((planet) => planet.name === planetName);
 
-  const [planet, setPlanet] = useState('planet');
   const [planetImg, setPlanetImg] = useState('planet');
   const [planetDesc, setPlanetDesc] = useState<string | undefined>();
   const [planetLink, setPlanetLink] = useState<string | undefined>();
@@ -40,7 +39,6 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
   };
 
   const handleGeologyClick = () => {
-    setPlanet('overview');
     setGeology('geology');
     setPlanetDesc('geology');
     setPlanetDesc(filteredPlanet?.geology.content);
@@ -108,15 +106,21 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
 
 const StyledArticle = styled.article`
   padding: 10rem 0 5rem;
+
+  @media (max-height: 59.4em) {
+    padding: 3rem 0 5rem;
+  }
+
+  @media (max-height: 52em) {
+    padding: 2rem 0 5rem;
+  }
 `;
 const Container = styled.div`
   max-width: 130rem;
   margin: 0 auto;
   padding: 0 3.2rem;
-  /* margin-top: 12.6rem; */
   display: grid;
   grid-template-columns: 65fr 35fr;
-  grid-template-rows: 500px;
   gap: 3.5rem;
 `;
 
@@ -176,7 +180,7 @@ const PlanetSource = styled.div`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 178.571% */
+  line-height: 25px;
 `;
 
 const StyledLink = styled.a`
@@ -185,8 +189,7 @@ const StyledLink = styled.a`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 178.571% */
-  /* margin-left: 0.3rem; */
+  line-height: 25px;
 `;
 
 const ConceptButtons = styled.div`

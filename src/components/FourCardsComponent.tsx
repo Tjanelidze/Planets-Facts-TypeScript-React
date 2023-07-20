@@ -37,6 +37,13 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
+  @media (max-height: 59.4em) {
+    margin-top: 6rem;
+  }
+
+  @media (max-height: 52em) {
+    margin-top: 3.5rem;
+  }
 `;
 
 const InformationCard = styled.div`
