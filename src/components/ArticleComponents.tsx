@@ -17,7 +17,7 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
   const [planetImg, setPlanetImg] = useState('planet');
   const [planetDesc, setPlanetDesc] = useState<string | undefined>();
   const [planetLink, setPlanetLink] = useState<string | undefined>();
-  const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [activeButton, setActiveButton] = useState<string>('overview');
   const [geology, setGeology] = useState('');
 
   const handleOverviewClick = () => {
