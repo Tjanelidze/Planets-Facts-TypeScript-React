@@ -2,39 +2,99 @@ import { planetDataInterface } from '../interface/planetDataInterface';
 import { styled } from 'styled-components';
 import { useParams } from 'react-router-dom';
 import FourCardsComponent from './FourCardsComponent';
+import { useEffect, useState } from 'react';
+
+type StyledButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  $color: string | undefined;
+  active: boolean;
+};
 
 export default function ArticleComponents({ planets }: planetDataInterface) {
   const { planetName } = useParams();
   const filteredPlanet = planets.find((planet) => planet.name === planetName);
+
+  const [planet, setPlanet] = useState('planet');
+  const [planetImg, setPlanetImg] = useState('planet');
+  const [planetDesc, setPlanetDesc] = useState<string | undefined>();
+  const [planetLink, setPlanetLink] = useState<string | undefined>();
+  const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [geology, setGeology] = useState('');
+
+  const handleOverviewClick = () => {
+    console.log();
+    setPlanetImg('planet');
+    setGeology('');
+    setPlanetDesc(filteredPlanet?.overview.content);
+    setPlanetLink(filteredPlanet?.overview.source);
+    setActiveButton('overview');
+    console.log(activeButton);
+  };
+
+  const handleInternalClick = () => {
+    setPlanetImg('internal');
+    setGeology('');
+    setPlanetDesc('structure');
+    setPlanetDesc(filteredPlanet?.structure.content);
+    setPlanetLink(filteredPlanet?.structure.source);
+    setActiveButton('internal');
+  };
+
+  const handleGeologyClick = () => {
+    setPlanet('overview');
+    setGeology('geology');
+    setPlanetDesc('geology');
+    setPlanetDesc(filteredPlanet?.geology.content);
+    setPlanetLink(filteredPlanet?.geology.source);
+    setActiveButton('geology');
+  };
+
+  useEffect(() => {
+    setPlanetDesc(filteredPlanet?.overview.content);
+    setPlanetLink(filteredPlanet?.overview.source);
+  }, [planetName]);
+
   return (
     <StyledArticle>
       <Container>
-        <PlanetImg>
+        <PlanetImg $geology={filteredPlanet?.images[geology && geology]}>
           <img
-            src={`${filteredPlanet?.images.planet}`}
+            src={filteredPlanet?.images[planetImg]}
             alt={`Illustartion of ${filteredPlanet?.name}`}
             style={{ width: '95%' }}
           />
         </PlanetImg>
         <ArticleConcept>
           <PlanetHeading>{filteredPlanet?.name}</PlanetHeading>
-          <PlanetDescription>
-            {filteredPlanet?.overview.content}
-          </PlanetDescription>
+          <PlanetDescription>{planetDesc}</PlanetDescription>
           <PlanetSource>
-            <p>Source </p>:<StyledLink href="#">Wikipedia</StyledLink>
+            <p>Source </p>:
+            <StyledLink href={`${planetLink}`} target="_blank">
+              Wikipedia
+            </StyledLink>
             <img src="/assets/icon-source.svg" alt="" />
           </PlanetSource>
           <ConceptButtons>
-            <StyledButton $color={filteredPlanet?.color}>
+            <StyledButton
+              onClick={handleOverviewClick}
+              $color={filteredPlanet?.color}
+              active={activeButton === 'overview'}
+            >
               <span>01</span>
               <span> OVERVIEW</span>
             </StyledButton>
-            <StyledButton $color={filteredPlanet?.color}>
+            <StyledButton
+              onClick={handleInternalClick}
+              $color={filteredPlanet?.color}
+              active={activeButton === 'internal'}
+            >
               <span>02</span>
               <span> Internal Structure</span>
             </StyledButton>
-            <StyledButton $color={filteredPlanet?.color}>
+            <StyledButton
+              onClick={handleGeologyClick}
+              $color={filteredPlanet?.color}
+              active={activeButton === 'geology'}
+            >
               <span>03</span>
               <span>Surface Geology</span>
             </StyledButton>
@@ -60,12 +120,34 @@ const Container = styled.div`
   gap: 3.5rem;
 `;
 
-const PlanetImg = styled.div`
+const PlanetImg = styled.div<{ $geology: string }>`
   align-self: center;
   justify-self: center;
+  position: relative;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    position: absolute;
+    background-image: url(${(props) => props.$geology});
+    background-repeat: no-repeat;
+    z-index: 999;
+    background-size: 90%;
+    width: 150px;
+    height: 165px;
+    content: '';
+    top: 66%;
+    left: 50%;
+    transform: translateX(-44%);
+  }
 `;
 
 const ArticleConcept = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   justify-self: end;
 `;
 
@@ -114,9 +196,9 @@ const ConceptButtons = styled.div`
   margin-top: 3.9rem;
 `;
 
-const StyledButton = styled.button<{ $color?: string }>`
+const StyledButton = styled.button<StyledButtonProps>`
   border: none;
-  background-color: #11112b;
+  background-color: ${(props) => (props.active ? props.$color : '#11112b')};
   color: #fff;
   font-family: 'League Spartan', sans-serif;
   font-size: 1.2rem;
@@ -135,11 +217,6 @@ const StyledButton = styled.button<{ $color?: string }>`
 
   &:hover {
     background-color: #38384f;
-    cursor: pointer;
-  }
-
-  &:active {
-    background-color: ${(props) => props.$color};
     cursor: pointer;
   }
 `;

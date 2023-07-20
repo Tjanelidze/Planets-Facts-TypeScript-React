@@ -1,4 +1,3 @@
-import React from 'react';
 import { planetDataInterface } from '../interface/planetDataInterface';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -37,7 +36,7 @@ const Container = styled.div`
   padding: 0 3.2rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 5rem;
+  gap: 3rem;
 `;
 
 const InformationCard = styled.div`
