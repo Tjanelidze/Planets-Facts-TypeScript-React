@@ -20,13 +20,11 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
   const [geology, setGeology] = useState('');
 
   const handleOverviewClick = () => {
-    console.log();
     setPlanetImg('planet');
     setGeology('');
     setPlanetDesc(filteredPlanet?.overview.content);
     setPlanetLink(filteredPlanet?.overview.source);
     setActiveButton('overview');
-    console.log(activeButton);
   };
 
   const handleInternalClick = () => {
@@ -47,8 +45,11 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
   };
 
   useEffect(() => {
+    setPlanetImg('planet');
+    setGeology('');
     setPlanetDesc(filteredPlanet?.overview.content);
     setPlanetLink(filteredPlanet?.overview.source);
+    setActiveButton('overview');
   }, [planetName]);
 
   return (
@@ -111,8 +112,12 @@ const StyledArticle = styled.article`
     padding: 3rem 0 5rem;
   }
 
-  @media (max-height: 52em) {
-    padding: 2rem 0 5rem;
+  @media (max-height: 53em) {
+    padding: 2rem 0 3rem;
+  }
+
+  @media (max-height: 50em) {
+    padding: 2rem 0 0.5rem;
   }
 `;
 const Container = styled.div`
@@ -160,6 +165,10 @@ const PlanetHeading = styled.h1`
   font-size: 8rem;
   font-weight: 400;
   text-transform: uppercase;
+
+  @media (max-width: 78em) {
+    font-size: 6.5rem;
+  }
 `;
 
 const PlanetDescription = styled.p`
@@ -169,6 +178,9 @@ const PlanetDescription = styled.p`
   font-weight: 400;
   line-height: 2.5rem;
   margin: 2.3rem 0;
+  @media (max-width: 78em) {
+    font-size: 1.3rem;
+  }
 `;
 
 const PlanetSource = styled.div`
@@ -221,5 +233,9 @@ const StyledButton = styled.button<StyledButtonProps>`
   &:hover {
     background-color: #38384f;
     cursor: pointer;
+  }
+
+  @media (max-width: 78em) {
+    font-size: 1.1rem;
   }
 `;

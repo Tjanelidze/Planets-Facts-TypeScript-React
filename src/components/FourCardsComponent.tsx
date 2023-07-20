@@ -41,7 +41,7 @@ const Container = styled.div`
     margin-top: 6rem;
   }
 
-  @media (max-height: 52em) {
+  @media (max-height: 53em) {
     margin-top: 3.5rem;
   }
 `;
@@ -59,6 +59,11 @@ const SecondaryHeading = styled.h2`
   line-height: 25px;
   letter-spacing: 1px;
   text-transform: uppercase;
+
+  @media (max-width: 78em) {
+    font-size: 0.9rem;
+    line-height: 15px;
+  }
 `;
 
 const StyledParagraphs = styled.p`
@@ -67,4 +72,7 @@ const StyledParagraphs = styled.p`
   font-weight: 400;
   letter-spacing: -1.5px;
   text-transform: uppercase;
+  @media (max-width: 78em) {
+    font-size: 3.2rem;
+  }
 `;

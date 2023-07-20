@@ -34,6 +34,13 @@ const Header = styled.header`
   border-bottom: 1px solid #ffffff22;
   padding: 0 4.1rem 0 3.2rem;
   height: 8.5rem;
+
+  @media (max-width: 55em) {
+    flex-direction: column;
+    padding: 2.6rem 4.1rem 0 3.2rem;
+    gap: 0.5rem;
+    height: 13rem;
+  }
 `;
 
 const MainTitle = styled(Link)`
