@@ -58,7 +58,7 @@ const InformationCard = styled.div`
   padding: 2rem 2.3rem 2.7rem;
 
   @media (max-width: 55em) {
-    padding: 1.6rem 1.5rem 1.9rem;
+    padding: 1.2rem 1.5rem 1.2rem;
   }
 
   @media (max-height: 46em) {

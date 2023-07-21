@@ -37,13 +37,22 @@ const Header = styled.header`
 
   @media (max-width: 55em) {
     flex-direction: column;
-    padding: 2.6rem 3.2rem 0 3.2rem;
+    padding: 1.6rem 3.2rem 0 3.2rem;
     gap: 0.5rem;
     height: 13rem;
   }
 
+  @media (max-width: 38em) {
+    flex-direction: row;
+  }
+
   @media (max-height: 50em) {
     height: 5.5rem;
+  }
+
+  @media (max-width: 38em) {
+    height: 6.5rem;
+    padding: 0.6rem 2.4rem;
   }
 `;
 
@@ -117,5 +126,9 @@ const StyledLink = styled(Link)<{ $color?: string }>`
 
   @media (max-width: 55em) {
     font-size: 11px;
+  }
+
+  @media (max-width: 38em) {
+    display: none;
   }
 `;

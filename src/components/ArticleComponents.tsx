@@ -129,7 +129,7 @@ const Container = styled.div`
   grid-template-columns: 65fr 35fr;
   gap: 3.5rem;
 
-  @media (max-width: 78em) {
+  @media (max-width: 55em) {
     grid-template-columns: 1fr;
   }
 `;
@@ -190,7 +190,7 @@ const ArticleConcept = styled.div`
   justify-content: space-between;
   justify-self: end;
 
-  @media (max-width: 78em) {
+  @media (max-width: 55em) {
     display: grid;
     grid-template-columns: 50fr 50fr;
     gap: 69px;
@@ -198,7 +198,7 @@ const ArticleConcept = styled.div`
 `;
 
 const DescriptionSection = styled.div`
-  @media (max-width: 78em) {
+  @media (max-width: 55em) {
     display: flex;
     flex-direction: column;
   }
