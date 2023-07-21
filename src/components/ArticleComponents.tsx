@@ -187,13 +187,16 @@ const PlanetImg = styled.div<{ $geology: string }>`
 const ArticleConcept = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   justify-self: end;
 
   @media (max-width: 55em) {
     display: grid;
     grid-template-columns: 50fr 50fr;
     gap: 69px;
+  }
+
+  @media (max-width: 78em) {
   }
 `;
 
@@ -258,7 +261,6 @@ const PlanetSource = styled.div`
 
 const StyledLink = styled.a`
   color: #ffffff9d;
-
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -270,6 +272,9 @@ const ConceptButtons = styled.div`
   flex-direction: column;
   gap: 1.6rem;
   margin-top: 3.9rem;
+  @media (max-height: 78em) {
+    margin-top: 0rem;
+  }
 `;
 
 const StyledButton = styled.button<StyledButtonProps>`

@@ -7,7 +7,7 @@ export default function HeaderComponent({ planets }: planetDataInterface) {
     <>
       <Header>
         <MainTitle to="/">The Planets</MainTitle>
-        <Mainnav>
+        <MainNav>
           <NavList>
             {planets.map((planet, indx) => {
               return (
@@ -19,7 +19,7 @@ export default function HeaderComponent({ planets }: planetDataInterface) {
               );
             })}
           </NavList>
-        </Mainnav>
+        </MainNav>
       </Header>
       <Outlet />
     </>
@@ -74,7 +74,7 @@ const MainTitle = styled(Link)`
   }
 `;
 
-const Mainnav = styled.nav`
+const MainNav = styled.nav`
   height: 100%;
 `;
 
