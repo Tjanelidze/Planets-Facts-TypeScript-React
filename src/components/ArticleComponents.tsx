@@ -59,19 +59,20 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
           <img
             src={filteredPlanet?.images[planetImg]}
             alt={`Illustartion of ${filteredPlanet?.name}`}
-            style={{ width: '95%' }}
           />
         </PlanetImg>
         <ArticleConcept>
-          <PlanetHeading>{filteredPlanet?.name}</PlanetHeading>
-          <PlanetDescription>{planetDesc}</PlanetDescription>
-          <PlanetSource>
-            <p>Source </p>:
-            <StyledLink href={`${planetLink}`} target="_blank">
-              Wikipedia
-            </StyledLink>
-            <img src="/assets/icon-source.svg" alt="" />
-          </PlanetSource>
+          <DescriptionSection>
+            <PlanetHeading>{filteredPlanet?.name}</PlanetHeading>
+            <PlanetDescription>{planetDesc}</PlanetDescription>
+            <PlanetSource>
+              <p>Source </p>:
+              <StyledLink href={`${planetLink}`} target="_blank">
+                Wikipedia
+              </StyledLink>
+              <img src="/assets/icon-source.svg" alt="" />
+            </PlanetSource>
+          </DescriptionSection>
           <ConceptButtons>
             <StyledButton
               onClick={handleOverviewClick}
@@ -117,7 +118,7 @@ const StyledArticle = styled.article`
   }
 
   @media (max-height: 50em) {
-    padding: 2rem 0 0.5rem;
+    padding: 0.5rem 0 0.5rem;
   }
 `;
 const Container = styled.div`
@@ -127,6 +128,10 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 65fr 35fr;
   gap: 3.5rem;
+
+  @media (max-width: 78em) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const PlanetImg = styled.div<{ $geology: string }>`
@@ -151,6 +156,32 @@ const PlanetImg = styled.div<{ $geology: string }>`
     left: 50%;
     transform: translateX(-44%);
   }
+
+  & img {
+    width: 95%;
+  }
+
+  @media (max-width: 55em) {
+    height: 309px;
+  }
+
+  @media (max-height: 59.4em) {
+    & img {
+      width: 85%;
+    }
+  }
+
+  @media (max-height: 53em) {
+    & img {
+      width: 75%;
+    }
+  }
+
+  @media (max-height: 50em) {
+    & img {
+      width: 65%;
+    }
+  }
 `;
 
 const ArticleConcept = styled.div`
@@ -158,6 +189,19 @@ const ArticleConcept = styled.div`
   flex-direction: column;
   justify-content: space-between;
   justify-self: end;
+
+  @media (max-width: 78em) {
+    display: grid;
+    grid-template-columns: 50fr 50fr;
+    gap: 69px;
+  }
+`;
+
+const DescriptionSection = styled.div`
+  @media (max-width: 78em) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const PlanetHeading = styled.h1`
@@ -169,6 +213,14 @@ const PlanetHeading = styled.h1`
   @media (max-width: 78em) {
     font-size: 6.5rem;
   }
+
+  @media (max-width: 55em) {
+    font-size: 4.8rem;
+  }
+
+  @media (max-height: 50em) {
+    font-size: 6.5rem;
+  }
 `;
 
 const PlanetDescription = styled.p`
@@ -178,7 +230,16 @@ const PlanetDescription = styled.p`
   font-weight: 400;
   line-height: 2.5rem;
   margin: 2.3rem 0;
+
   @media (max-width: 78em) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 55em) {
+    font-size: 1.1rem;
+  }
+
+  @media (max-height: 50em) {
     font-size: 1.3rem;
   }
 `;
@@ -237,5 +298,15 @@ const StyledButton = styled.button<StyledButtonProps>`
 
   @media (max-width: 78em) {
     font-size: 1.1rem;
+  }
+
+  @media (max-width: 55em) {
+    font-size: 1rem;
+    padding: 0.8rem 2.2rem;
+  }
+
+  @media (max-height: 50em) {
+    font-size: 1.1rem;
+    padding: 0.8rem 2.2rem;
   }
 `;

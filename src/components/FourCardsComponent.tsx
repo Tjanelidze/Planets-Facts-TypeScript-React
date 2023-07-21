@@ -44,11 +44,30 @@ const Container = styled.div`
   @media (max-height: 53em) {
     margin-top: 3.5rem;
   }
+
+  @media (max-height: 46em) {
+    margin-top: 2.8rem;
+  }
+  @media (max-height: 43em) {
+    margin-top: 2.5rem;
+  }
 `;
 
 const InformationCard = styled.div`
   border: 1px solid #ffffff22;
   padding: 2rem 2.3rem 2.7rem;
+
+  @media (max-width: 55em) {
+    padding: 1.6rem 1.5rem 1.9rem;
+  }
+
+  @media (max-height: 46em) {
+    padding: 1.3rem 1.3rem 1.7rem;
+  }
+
+  @media (max-height: 43em) {
+    padding: 1rem 1.3rem 1.7rem;
+  }
 `;
 
 const SecondaryHeading = styled.h2`
@@ -64,6 +83,20 @@ const SecondaryHeading = styled.h2`
     font-size: 0.9rem;
     line-height: 15px;
   }
+
+  @media (max-width: 55em) {
+    font-size: 0.8rem;
+    line-height: 12px;
+  }
+
+  @media (max-height: 46em) {
+    font-size: 1rem;
+    line-height: 18px;
+  }
+  @media (max-height: 43em) {
+    font-size: 0.9rem;
+    line-height: 15px;
+  }
 `;
 
 const StyledParagraphs = styled.p`
@@ -72,7 +105,19 @@ const StyledParagraphs = styled.p`
   font-weight: 400;
   letter-spacing: -1.5px;
   text-transform: uppercase;
+
   @media (max-width: 78em) {
     font-size: 3.2rem;
+  }
+
+  @media (max-width: 55em) {
+    font-size: 2.2rem;
+  }
+
+  @media (max-height: 46em) {
+    font-size: 3.2rem;
+  }
+  @media (max-height: 43em) {
+    font-size: 2.5rem;
   }
 `;
