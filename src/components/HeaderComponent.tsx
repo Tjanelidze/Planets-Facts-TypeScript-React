@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { planetDataInterface } from '../interface/planetDataInterface';
 import { Link, Outlet } from 'react-router-dom';
 import BurgetMenu from './BurgetMenu';
+import HomeComponent from './HomeComponent';
 
 export default function HeaderComponent({
   planets,
@@ -34,6 +35,7 @@ export default function HeaderComponent({
         </MainNav>
       </Header>
       <Outlet />
+      <HomeComponent planets={planets} open={open} setOpen={setOpen} />
     </>
   );
 }
