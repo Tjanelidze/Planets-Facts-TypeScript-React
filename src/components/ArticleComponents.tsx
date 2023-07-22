@@ -46,6 +46,7 @@ export default function ArticleComponents({
   };
 
   const handleGeologyClick = () => {
+    setPlanetImg('planet');
     setGeology('geology');
     setPlanetDesc('geology');
     setPlanetDesc(filteredPlanet?.geology.content);
