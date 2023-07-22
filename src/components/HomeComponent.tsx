@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { planetDataInterface } from '../interface/planetDataInterface';
 import { Link } from 'react-router-dom';
