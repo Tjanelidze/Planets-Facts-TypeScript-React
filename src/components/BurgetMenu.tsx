@@ -18,7 +18,7 @@ export default function BurgetMenu({ open, setOpen }: PROPS) {
 const StyledBurger = styled.div<{ open: boolean }>`
   width: 2rem;
   height: 2rem;
-  position: fixed;
+  position: ${({ open }) => (open ? 'fixed' : 'absolute')};
   top: 23px;
   right: 20px;
   display: flex;

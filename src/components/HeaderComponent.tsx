@@ -18,7 +18,11 @@ export default function HeaderComponent({
             {planets.map((planet, indx) => {
               return (
                 <li key={indx}>
-                  <StyledLink to={`/${planet.name}`} $color={planet.color}>
+                  <StyledLink
+                    to={`/${planet.name}`}
+                    $color={planet.color}
+                    onClick={() => setOpen(!open)}
+                  >
                     {planet.name}
                   </StyledLink>
                 </li>
@@ -102,7 +106,8 @@ const NavList = styled.ul<{ open: boolean }>`
     background-color: #11112b;
     position: fixed;
     transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
-    top: 62px;
+    top: 64.5px;
+
     right: 0;
     height: 100vh;
     width: 100%;
@@ -156,8 +161,31 @@ const StyledLink = styled(Link)<{ $color?: string }>`
   }
 
   @media (max-width: 38em) {
-    &:link {
-      color: red;
+    font-size: 1.5rem;
+    color: #fff !important;
+    position: relative;
+    border-bottom: 1px solid #ffffff22;
+    padding-left: 3rem;
+    padding-bottom: 2rem;
+    &::after {
+      content: '';
+      background: url('assets/icon-chevron.svg');
+      background-repeat: no-repeat;
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      left: 100%;
+      color: #ffffff3e;
+    }
+
+    &::before {
+      content: '';
+      background-color: ${(props) => props.$color};
+      border-radius: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
+      position: absolute;
+      left: 0;
     }
   }
 `;
