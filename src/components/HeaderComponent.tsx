@@ -21,7 +21,9 @@ export default function HeaderComponent({
                   <StyledLink
                     to={`/${planet.name}`}
                     $color={planet.color}
-                    onClick={() => setOpen(!open)}
+                    onClick={() => {
+                      setOpen(!open);
+                    }}
                   >
                     {planet.name}
                   </StyledLink>

@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 function App() {
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <GlobalStyle />
