@@ -24,4 +24,6 @@ export interface planetDataInterface {
     };
     color: string;
   }[];
+  open: boolean;
+  setOpen: (open: boolean) => void;
 }

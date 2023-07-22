@@ -9,7 +9,11 @@ type StyledButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   active: boolean;
 };
 
-export default function ArticleComponents({ planets }: planetDataInterface) {
+export default function ArticleComponents({
+  planets,
+  open,
+  setOpen,
+}: planetDataInterface) {
   const { planetName } = useParams();
   const filteredPlanet = planets.find((planet) => planet.name === planetName);
 
@@ -53,7 +57,7 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
   }, [planetName]);
 
   return (
-    <StyledArticle>
+    <StyledArticle open={open}>
       <Container>
         <PlanetImg $geology={filteredPlanet?.images[geology && geology]}>
           <img
@@ -101,12 +105,12 @@ export default function ArticleComponents({ planets }: planetDataInterface) {
           </ConceptButtons>
         </ArticleConcept>
       </Container>
-      <FourCardsComponent planets={planets} />
+      <FourCardsComponent open={open} setOpen={setOpen} planets={planets} />
     </StyledArticle>
   );
 }
 
-const StyledArticle = styled.article`
+const StyledArticle = styled.article<{ open: string }>`
   padding: 10rem 0 5rem;
 
   @media (max-height: 59.4em) {
@@ -120,6 +124,10 @@ const StyledArticle = styled.article`
   @media (max-height: 50em) {
     padding: 0.5rem 0 0.5rem;
   }
+
+  @media (max-width: 38em) {
+    margin-top: ${({ open }) => (open ? '6.5rem' : '0')};
+  }
 `;
 const Container = styled.div`
   max-width: 130rem;
@@ -131,6 +139,7 @@ const Container = styled.div`
 
   @media (max-width: 55em) {
     grid-template-columns: 1fr;
+    margin-top: 5rem;
   }
 `;
 
@@ -167,19 +176,19 @@ const PlanetImg = styled.div<{ $geology: string }>`
 
   @media (max-height: 59.4em) {
     & img {
-      width: 85%;
+      width: 65%;
     }
   }
 
   @media (max-height: 53em) {
     & img {
-      width: 75%;
+      width: 55%;
     }
   }
 
   @media (max-height: 50em) {
     & img {
-      width: 65%;
+      width: 45%;
     }
   }
 `;

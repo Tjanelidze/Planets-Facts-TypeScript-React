@@ -1,14 +1,25 @@
 import styled from 'styled-components';
 import { planetDataInterface } from '../interface/planetDataInterface';
 import { Link, Outlet } from 'react-router-dom';
+import BurgetMenu from './BurgetMenu';
+import { useState } from 'react';
 
-export default function HeaderComponent({ planets }: planetDataInterface) {
+interface PROPS {
+  planets: planetDataInterface;
+}
+
+export default function HeaderComponent({
+  planets,
+  open,
+  setOpen,
+}: planetDataInterface) {
   return (
     <>
-      <Header>
+      <Header open={open}>
         <MainTitle to="/">The Planets</MainTitle>
+        <BurgetMenu open={open} setOpen={setOpen} />
         <MainNav>
-          <NavList>
+          <NavList open={open}>
             {planets.map((planet, indx) => {
               return (
                 <li key={indx}>
@@ -26,7 +37,7 @@ export default function HeaderComponent({ planets }: planetDataInterface) {
   );
 }
 
-const Header = styled.header`
+const Header = styled.header<{ open: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,6 +64,11 @@ const Header = styled.header`
   @media (max-width: 38em) {
     height: 6.5rem;
     padding: 0.6rem 2.4rem;
+    position: ${({ open }) => (open ? 'fixed' : 'relative')};
+    top: ${({ open }) => (open ? '0' : '')};
+    background-color: #11112b;
+    width: 100%;
+    z-index: 1;
   }
 `;
 
@@ -78,11 +94,27 @@ const MainNav = styled.nav`
   height: 100%;
 `;
 
-const NavList = styled.ul`
+const NavList = styled.ul<{ open: boolean }>`
   display: flex;
   gap: 3.3rem;
   list-style: none;
   height: 100%;
+  @media (max-width: 38em) {
+  }
+
+  @media (max-width: 38em) {
+    flex-flow: column nowrap;
+    background-color: #11112b;
+    position: fixed;
+    transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
+    top: 62px;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    padding: 3.5rem;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1;
+  }
 `;
 
 const StyledLink = styled(Link)<{ $color?: string }>`
@@ -129,6 +161,8 @@ const StyledLink = styled(Link)<{ $color?: string }>`
   }
 
   @media (max-width: 38em) {
-    display: none;
+    &:link {
+      color: red;
+    }
   }
 `;
