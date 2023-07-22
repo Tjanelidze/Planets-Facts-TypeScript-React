@@ -67,7 +67,7 @@ const Header = styled.header<{ open: boolean }>`
     top: ${({ open }) => (open ? '0' : '')};
     background-color: #11112b;
     width: 100%;
-    z-index: 1;
+    z-index: 999;
   }
 `;
 
@@ -113,7 +113,7 @@ const NavList = styled.ul<{ open: boolean }>`
     width: 100%;
     padding: 3.5rem;
     transition: transform 0.3s ease-in-out;
-    z-index: 1;
+    z-index: 999;
   }
 `;
 

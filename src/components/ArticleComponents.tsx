@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { useParams } from 'react-router-dom';
 import FourCardsComponent from './FourCardsComponent';
 import { useEffect, useState } from 'react';
+import MobileConceptButtons from './MobileConceptButtons';
 
 type StyledButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   $color: string | undefined;
@@ -16,11 +17,15 @@ export default function ArticleComponents({
 }: planetDataInterface) {
   const { planetName } = useParams();
   const filteredPlanet = planets.find((planet) => planet.name === planetName);
+  const [activeButton, setActiveButton] = useState<string>('overview');
+  const activeOverview = activeButton === 'overview' ? 'true' : 'false';
+  const activeInternal = activeButton === 'internal' ? 'true' : 'false';
+  const activeGeology = activeButton === 'geology' ? 'true' : 'false';
 
   const [planetImg, setPlanetImg] = useState('planet');
   const [planetDesc, setPlanetDesc] = useState<string | undefined>();
   const [planetLink, setPlanetLink] = useState<string | undefined>();
-  const [activeButton, setActiveButton] = useState<string>('overview');
+
   const [geology, setGeology] = useState('');
 
   const handleOverviewClick = () => {
@@ -58,6 +63,15 @@ export default function ArticleComponents({
 
   return (
     <StyledArticle open={open}>
+      <MobileConceptButtons
+        activeOverview={activeOverview}
+        activeInternal={activeInternal}
+        activeGeology={activeGeology}
+        color={filteredPlanet?.color}
+        handleOverviewClick={handleOverviewClick}
+        handleInternalClick={handleInternalClick}
+        handleGeologyClick={handleGeologyClick}
+      />
       <Container>
         <PlanetImg $geology={filteredPlanet?.images[geology && geology]}>
           <img
@@ -74,14 +88,14 @@ export default function ArticleComponents({
               <StyledLink href={`${planetLink}`} target="_blank">
                 Wikipedia
               </StyledLink>
-              <img src="/assets/icon-source.svg" alt="" />
+              <img src="/assets/icon-source.svg" alt="link icon" />
             </PlanetSource>
           </DescriptionSection>
           <ConceptButtons>
             <StyledButton
               onClick={handleOverviewClick}
               $color={filteredPlanet?.color}
-              active={activeButton === 'overview' ? 'true' : 'false'}
+              active={activeOverview}
             >
               <span>01</span>
               <span> OVERVIEW</span>
@@ -89,7 +103,7 @@ export default function ArticleComponents({
             <StyledButton
               onClick={handleInternalClick}
               $color={filteredPlanet?.color}
-              active={activeButton === 'internal' ? 'true' : 'false'}
+              active={activeInternal}
             >
               <span>02</span>
               <span> Internal Structure</span>
@@ -97,7 +111,7 @@ export default function ArticleComponents({
             <StyledButton
               onClick={handleGeologyClick}
               $color={filteredPlanet?.color}
-              active={activeButton === 'geology' ? 'true' : 'false'}
+              active={activeGeology}
             >
               <span>03</span>
               <span>Surface Geology</span>
@@ -128,6 +142,10 @@ const StyledArticle = styled.article<{ open: boolean }>`
   @media (max-width: 38em) {
     margin-top: ${({ open }) => (open ? '6.5rem' : '0')};
   }
+
+  @media (max-width: 43em) {
+    padding-bottom: 5rem;
+  }
 `;
 const Container = styled.div`
   max-width: 130rem;
@@ -155,7 +173,7 @@ const PlanetImg = styled.div<{ $geology: string }>`
     position: absolute;
     background-image: url(${(props) => props.$geology});
     background-repeat: no-repeat;
-    z-index: 999;
+    z-index: 5;
     background-size: 90%;
     width: 150px;
     height: 165px;
@@ -163,6 +181,11 @@ const PlanetImg = styled.div<{ $geology: string }>`
     top: 66%;
     left: 50%;
     transform: translateX(-44%);
+
+    @media (max-width: 38em) {
+      left: 53.5%;
+      background-size: 65%;
+    }
   }
 
   & img {
@@ -204,7 +227,8 @@ const ArticleConcept = styled.div`
     gap: 69px;
   }
 
-  @media (max-width: 78em) {
+  @media (max-width: 38em) {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -212,6 +236,11 @@ const DescriptionSection = styled.div`
   @media (max-width: 55em) {
     display: flex;
     flex-direction: column;
+  }
+
+  @media (max-width: 38em) {
+    text-align: center;
+    align-items: center;
   }
 `;
 
@@ -231,6 +260,10 @@ const PlanetHeading = styled.h1`
 
   @media (max-height: 50em) {
     font-size: 6.5rem;
+  }
+
+  @media (max-width: 43em) {
+    font-size: 4rem;
   }
 `;
 
@@ -253,6 +286,10 @@ const PlanetDescription = styled.p`
   @media (max-height: 50em) {
     font-size: 1.3rem;
   }
+
+  @media (max-width: 43em) {
+    font-size: 1.1rem;
+  }
 `;
 
 const PlanetSource = styled.div`
@@ -261,18 +298,15 @@ const PlanetSource = styled.div`
   gap: 0.5rem;
   color: #ffffff81;
   font-family: 'League Spartan', sans-serif;
-  font-size: 14px;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px;
 `;
 
 const StyledLink = styled.a`
   color: #ffffff9d;
-  font-size: 14px;
-  font-style: normal;
+  font-size: 1.2rem;
   font-weight: 400;
-  line-height: 25px;
 `;
 
 const ConceptButtons = styled.div`
@@ -282,6 +316,11 @@ const ConceptButtons = styled.div`
   margin-top: 3.9rem;
   @media (max-height: 78em) {
     margin-top: 0rem;
+  }
+
+  @media (max-width: 38em) {
+    display: none;
+    visibility: hidden;
   }
 `;
 
