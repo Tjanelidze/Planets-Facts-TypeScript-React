@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 type StyledButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   $color: string | undefined;
-  active: boolean;
+  active: string;
 };
 
 export default function ArticleComponents({
@@ -81,7 +81,7 @@ export default function ArticleComponents({
             <StyledButton
               onClick={handleOverviewClick}
               $color={filteredPlanet?.color}
-              active={activeButton === 'overview'}
+              active={activeButton === 'overview' ? 'true' : 'false'}
             >
               <span>01</span>
               <span> OVERVIEW</span>
@@ -89,7 +89,7 @@ export default function ArticleComponents({
             <StyledButton
               onClick={handleInternalClick}
               $color={filteredPlanet?.color}
-              active={activeButton === 'internal'}
+              active={activeButton === 'internal' ? 'true' : 'false'}
             >
               <span>02</span>
               <span> Internal Structure</span>
@@ -97,7 +97,7 @@ export default function ArticleComponents({
             <StyledButton
               onClick={handleGeologyClick}
               $color={filteredPlanet?.color}
-              active={activeButton === 'geology'}
+              active={activeButton === 'geology' ? 'true' : 'false'}
             >
               <span>03</span>
               <span>Surface Geology</span>
@@ -110,7 +110,7 @@ export default function ArticleComponents({
   );
 }
 
-const StyledArticle = styled.article<{ open: string }>`
+const StyledArticle = styled.article<{ open: boolean }>`
   padding: 10rem 0 5rem;
 
   @media (max-height: 59.4em) {
@@ -139,7 +139,6 @@ const Container = styled.div`
 
   @media (max-width: 55em) {
     grid-template-columns: 1fr;
-    margin-top: 5rem;
   }
 `;
 
@@ -288,7 +287,8 @@ const ConceptButtons = styled.div`
 
 const StyledButton = styled.button<StyledButtonProps>`
   border: none;
-  background-color: ${(props) => (props.active ? props.$color : '#11112b')};
+  background-color: ${(props) =>
+    props.active === 'true' ? props.$color : '#11112b'};
   color: #fff;
   font-family: 'League Spartan', sans-serif;
   font-size: 1.2rem;

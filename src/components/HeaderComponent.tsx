@@ -2,11 +2,6 @@ import styled from 'styled-components';
 import { planetDataInterface } from '../interface/planetDataInterface';
 import { Link, Outlet } from 'react-router-dom';
 import BurgetMenu from './BurgetMenu';
-import { useState } from 'react';
-
-interface PROPS {
-  planets: planetDataInterface;
-}
 
 export default function HeaderComponent({
   planets,
@@ -58,7 +53,7 @@ const Header = styled.header<{ open: boolean }>`
   }
 
   @media (max-height: 50em) {
-    height: 5.5rem;
+    height: 10.5rem;
   }
 
   @media (max-width: 38em) {
